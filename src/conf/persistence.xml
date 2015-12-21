@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="VoistkondadeAppPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>ee.andmebaasid.entity.VoistkonnaSeisundiLiik</class>
+    <class>ee.andmebaasid.entity.Spordiala</class>
+    <class>ee.andmebaasid.entity.Riik</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://apex.ttu.ee:7301/t093817"/>
+      <property name="javax.persistence.jdbc.user" value="t093817"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="2dX24KtFhB65XYfz"/>
+    </properties>
+  </persistence-unit>
+</persistence>
