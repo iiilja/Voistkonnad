@@ -5,6 +5,7 @@
     <class>ee.andmebaasid.entity.VoistkonnaSeisundiLiik</class>
     <class>ee.andmebaasid.entity.Spordiala</class>
     <class>ee.andmebaasid.entity.Riik</class>
+    <class>ee.andmebaasid.entity.Amet</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://apex.ttu.ee:7301/t093817"/>

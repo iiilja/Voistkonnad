@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VTootaja.findAll", query = "SELECT v FROM VTootaja v"),
     @NamedQuery(name = "VTootaja.findByTootajaId", query = "SELECT v FROM VTootaja v WHERE v.tootajaId = :tootajaId"),
     @NamedQuery(name = "VTootaja.findByEMail", query = "SELECT v FROM VTootaja v WHERE v.eMail = :eMail"),
+    @NamedQuery(name = "VTootaja.findByKasutajanimi", query = "SELECT v FROM VTootaja v WHERE v.kasutajanimi = :kasutajanimi"),
     @NamedQuery(name = "VTootaja.findByEesnimi", query = "SELECT v FROM VTootaja v WHERE v.eesnimi = :eesnimi"),
     @NamedQuery(name = "VTootaja.findByPerenimi", query = "SELECT v FROM VTootaja v WHERE v.perenimi = :perenimi"),
     @NamedQuery(name = "VTootaja.findBySeisundiLiik", query = "SELECT v FROM VTootaja v WHERE v.seisundiLiik = :seisundiLiik"),
@@ -38,6 +40,8 @@ public class VTootaja implements Serializable {
     private Integer tootajaId;
     @Column(name = "e_mail")
     private String eMail;
+    @Column(name = "kasutajanimi")
+    private String kasutajanimi;
     @Column(name = "eesnimi")
     private String eesnimi;
     @Column(name = "perenimi")
@@ -48,6 +52,9 @@ public class VTootaja implements Serializable {
     @Basic(optional = false)
     @Column(name = "amet")
     private String amet;
+    
+    @Transient
+    private String token;
 
     public VTootaja() {
     }
@@ -99,5 +106,16 @@ public class VTootaja implements Serializable {
     public void setAmet(String amet) {
         this.amet = amet;
     }
-    
+
+    public String getKasutajanimi() {
+        return kasutajanimi;
+    }
+
+    public void setKasutajanimi(String kasutajanimi) {
+        this.kasutajanimi = kasutajanimi;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

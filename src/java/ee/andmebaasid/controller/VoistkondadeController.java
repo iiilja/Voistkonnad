@@ -1,11 +1,15 @@
 package ee.andmebaasid.controller;
 
+import ee.andmebaasid.auth.Session;
+import ee.andmebaasid.auth.SessionService;
+import ee.andmebaasid.entity.VTootaja;
 import ee.andmebaasid.entity.VVoistkond;
 import ee.andmebaasid.service.VoistkonnadService;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
@@ -21,7 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Dmitri
  */
-@Controller
+@RequestMapping(value = "voistkonnad")
+@Controller()
 public class VoistkondadeController {
 
     public VoistkondadeController() {
@@ -32,12 +37,12 @@ public class VoistkondadeController {
     @Autowired(required=true)
     private VoistkonnadService voistkonnadService;
     
+    @Autowired SessionService sessionService;
+    
     
     @RequestMapping(value = "/s", method = RequestMethod.GET)
-    public ModelAndView getAll(
-            @RequestParam(required = false) Integer id,
-            HttpServletRequest request,
-            HttpServletResponse response) throws JSONException{
+    public ModelAndView getAll(@RequestParam(required = false) Integer id) {
+        System.out.println("getAll");
         if (id != null) {
             System.out.println("byId " + id);
             Map<String, Object> model = new HashMap<>();
@@ -60,7 +65,7 @@ public class VoistkondadeController {
             @RequestParam String nimetus,
             @RequestParam short spordialaKood,
             @RequestParam String riikKood,
-            @RequestParam short seisundiLiik,
+            @RequestParam(required = false) Short seisundiLiik,
             @RequestParam String email,
             @RequestParam String kirjeldus,
             @RequestParam(required = false) Integer id,
@@ -78,7 +83,6 @@ public class VoistkondadeController {
                     } catch ( Exception e){
                         message = e.getCause().getLocalizedMessage();
                         message = message.substring(0, message.indexOf("Where"));
-                        e.printStackTrace();
                     }
                     VVoistkond voistkond = voistkonnadService.findVoistkondById(id);
                     model.put("voistkond", voistkond);
@@ -119,13 +123,12 @@ public class VoistkondadeController {
         model.put("spordialas", voistkonnadService.getSpordialas());
         model.put("riiks", voistkonnadService.getRiiks());
         model.put("seisundiLiiks", Collections.EMPTY_LIST);
-        return new ModelAndView("voistkond", model);//getWithID(id);
+        return new ModelAndView("voistkond_new", model);//getWithID(id);
     }
 
     
     @ExceptionHandler(Exception.class)
     public void handleAllException(Exception ex) {
-        System.err.println(ex.getMessage());
         ex.printStackTrace();
     }
 }

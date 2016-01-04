@@ -11,7 +11,7 @@
 
         <a href='s'>servlet</a> <br>
         <p color="red">${error}</p>
-        <form action='s?action=${voistkond.voistkondId ==null ? "create" : "update"}' method=POST>
+        <form action='s?action=update' method=POST>
             <table bgcolor='#000000' border=0 cellpadding=0 cellspacing=0>
                 <tr>
                     <td>

@@ -1,18 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ee.andmebaasid.service;
 
 import ee.andmebaasid.entity.Riik;
 import ee.andmebaasid.entity.Spordiala;
+import ee.andmebaasid.entity.VTootaja;
 import ee.andmebaasid.entity.VVoistkond;
 import ee.andmebaasid.entity.VoistkonnaSeisundiLiik;
-import java.sql.JDBCType;
 import java.util.List;
 import javax.persistence.ParameterMode;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.procedure.ProcedureCall;
@@ -110,7 +104,6 @@ public class VoistkonnadServiceImpl implements VoistkonnadService {
         procedureCall.registerParameter(7, String.class, ParameterMode.IN).bindValue(email);
         procedureCall.registerParameter(8, String.class, ParameterMode.IN).bindValue(kirjeldus);
 
-        System.out.println(procedureCall.toString());
         ResultSetOutput out = (ResultSetOutput) procedureCall
                 .getOutputs().getCurrent();
         return (boolean) out.getSingleResult();
@@ -127,19 +120,27 @@ public class VoistkonnadServiceImpl implements VoistkonnadService {
         procedureCall.registerParameter(5, String.class, ParameterMode.IN).bindValue(email);
         procedureCall.registerParameter(6, String.class, ParameterMode.IN).bindValue(kirjeldus);
 
-        System.out.println(procedureCall.toString());
         ResultSetOutput out = (ResultSetOutput) procedureCall
                 .getOutputs().getCurrent();
         return (Integer) out.getSingleResult();
     }
-    
-    
 
-    
-            
-    
-    
-    
-    
+    @Override
+    public boolean login(String name, String password) {
+        Session session = sessionFactory.getCurrentSession();
+        ProcedureCall procedureCall = session.createStoredProcedureCall("login_mangude_haldur");
+        procedureCall.registerParameter(1, String.class, ParameterMode.IN).bindValue(name);
+        procedureCall.registerParameter(2, String.class, ParameterMode.IN).bindValue(password);
+
+        ResultSetOutput out = (ResultSetOutput) procedureCall
+                .getOutputs().getCurrent();
+        return (boolean) out.getSingleResult();
+    }
+
+    @Override
+    public VTootaja getTootajaByNickName(String login) {
+        Session session = sessionFactory.getCurrentSession();
+        return (VTootaja) session.getNamedQuery("VTootaja.findByKasutajanimi").setParameter("kasutajanimi", login);
+    }
     
 }
