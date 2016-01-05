@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
+        <c:if test="${token !=null}">
         <script>
             function setCookie(cname,cvalue,exdays) {
                 var d = new Date();
@@ -11,12 +12,13 @@
                 document.cookie = cname+"="+cvalue+"; "+expires;
             }
         </script>
+        </c:if>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>voistkonds</title>
     </head>
     <body onload="setCookie('token', '${token}',1/24)">
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <a href='s'>Voiskonnad</a> | <a href='new'>Create new</a> <br>
+        <a href='../voistkonnad/s'>Voiskonnad</a> | <a href='../voistkonnad/new'>Create new</a> <br>
         voistkonds list: 
         <br>
         <table border=1 cellpadding=2 cellspacing=1>

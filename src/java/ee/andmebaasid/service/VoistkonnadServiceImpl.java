@@ -140,7 +140,7 @@ public class VoistkonnadServiceImpl implements VoistkonnadService {
     @Override
     public VTootaja getTootajaByNickName(String login) {
         Session session = sessionFactory.getCurrentSession();
-        return (VTootaja) session.getNamedQuery("VTootaja.findByKasutajanimi").setParameter("kasutajanimi", login);
+        return (VTootaja) session.getNamedQuery("VTootaja.findByKasutajanimi").setParameter("kasutajanimi", login).uniqueResult();
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package ee.andmebaasid.auth;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SessionService{
     
-    private Map<String,Session> sessions;
+    private Map<String,Session> sessions = new HashMap<>();
     
     public void addSession(String token, Session session){
         sessions.put(token, session);

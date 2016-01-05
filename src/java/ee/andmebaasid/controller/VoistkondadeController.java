@@ -41,8 +41,9 @@ public class VoistkondadeController {
     
     
     @RequestMapping(value = "/s", method = RequestMethod.GET)
-    public ModelAndView getAll(@RequestParam(required = false) Integer id) {
-        System.out.println("getAll");
+    public ModelAndView getAll(@RequestParam(required = false) Integer id,
+            String token) {
+        System.out.println("getAll token = " + token);
         if (id != null) {
             System.out.println("byId " + id);
             Map<String, Object> model = new HashMap<>();
@@ -55,6 +56,7 @@ public class VoistkondadeController {
         }
         List<VVoistkond> voistkonds = voistkonnadService.getAllVoistkonds();
         Map<String, Object> model = new HashMap<>();
+        model.put("token", token);
         model.put("voistkonds", voistkonds);
         return new ModelAndView("voistkonds", model);
     }

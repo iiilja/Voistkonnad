@@ -42,7 +42,7 @@ public class UserController {
             String token = UUID.randomUUID().toString();
             tootaja.setToken(token);
             sessionService.addSession(token, new Session(tootaja));
-            return voistkondadeController.getAll(null);
+            return voistkondadeController.getAll(null, token);
         } else {
             return null;
         }

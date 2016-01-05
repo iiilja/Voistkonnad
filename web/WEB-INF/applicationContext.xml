@@ -57,5 +57,6 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
     
     <bean id="voistkondService" class="ee.andmebaasid.service.VoistkonnadServiceImpl" />
+    <bean id="sessionservice" class="ee.andmebaasid.auth.SessionService" />
     
 </beans>
