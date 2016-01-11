@@ -3,20 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <c:if test="${token !=null}">
-        <script>
-            function setCookie(cname,cvalue,exdays) {
-                var d = new Date();
-                d.setTime(d.getTime() + (exdays*24*60*60*1000));
-                var expires = "expires=" + d.toGMTString();
-                document.cookie = cname+"="+cvalue+"; "+expires;
-            }
-        </script>
-        </c:if>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>voistkonds</title>
+        <title>Voistkonnad</title>
     </head>
-    <body onload="setCookie('token', '${token}',1/24)">
+    <body>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <a href='../voistkonnad/s'>Voiskonnad</a> | <a href='../voistkonnad/new'>Create new</a> | <a href='../user/logout'>Logi valja</a><br>
         voistkonds list: 

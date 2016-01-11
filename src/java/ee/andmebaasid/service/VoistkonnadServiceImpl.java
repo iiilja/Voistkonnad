@@ -4,7 +4,9 @@ import ee.andmebaasid.entity.Riik;
 import ee.andmebaasid.entity.Spordiala;
 import ee.andmebaasid.entity.VTootaja;
 import ee.andmebaasid.entity.VVoistkond;
+import ee.andmebaasid.entity.VVoistkondAktiivne;
 import ee.andmebaasid.entity.VoistkonnaSeisundiLiik;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.ParameterMode;
 import org.hibernate.Session;
@@ -29,7 +31,7 @@ public class VoistkonnadServiceImpl implements VoistkonnadService {
     @Override
     public List<VVoistkond> getAllVoistkonds() {
         Session session = sessionFactory.getCurrentSession();
-        return session.getNamedQuery("VVoistkond.findAll").list();
+        return Collections.checkedList(session.getNamedQuery("VVoistkond.findAll").list(), VVoistkond.class);
     }
 
     @Override
@@ -38,11 +40,17 @@ public class VoistkonnadServiceImpl implements VoistkonnadService {
         return (VVoistkond) session.getNamedQuery("VVoistkond.findByVoistkondId")
                 .setParameter("voistkondId", id).uniqueResult();
     }
+    
+    @Override
+    public List<VVoistkondAktiivne> getAllActiveVoistkonds(){
+        Session session = sessionFactory.getCurrentSession();
+        return Collections.checkedList(session.getNamedQuery("VVoistkondAktiivne.findAll").list(), VVoistkondAktiivne.class);
+    }
 
     @Override
     public List<Riik> getRiiks() {
         Session session = sessionFactory.getCurrentSession();
-        return session.getNamedQuery("Riik.findAll").list();
+        return Collections.checkedList(session.getNamedQuery("Riik.findAll").list(), Riik.class);
     }
 
     @Override
@@ -60,7 +68,7 @@ public class VoistkonnadServiceImpl implements VoistkonnadService {
     @Override
     public List<VoistkonnaSeisundiLiik> getSeisundiLiiks() {
         Session session = sessionFactory.getCurrentSession();
-        return session.getNamedQuery("VoistkonnaSeisundiLiik.findAll").list();
+        return Collections.checkedList(session.getNamedQuery("VoistkonnaSeisundiLiik.findAll").list(), VoistkonnaSeisundiLiik.class);
     }
 
     @Override
@@ -77,7 +85,7 @@ public class VoistkonnadServiceImpl implements VoistkonnadService {
     @Override
     public List<Spordiala> getSpordialas() {
         Session session = sessionFactory.getCurrentSession();
-        return session.getNamedQuery("Spordiala.findAll").list();
+        return Collections.checkedList(session.getNamedQuery("Spordiala.findAll").list(), Spordiala.class);
     }
 
     @Override

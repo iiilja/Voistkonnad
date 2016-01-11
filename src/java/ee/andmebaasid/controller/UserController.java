@@ -8,15 +8,22 @@ package ee.andmebaasid.controller;
 import ee.andmebaasid.auth.Session;
 import ee.andmebaasid.auth.SessionService;
 import ee.andmebaasid.entity.VTootaja;
+import ee.andmebaasid.entity.VVoistkondAktiivne;
 import ee.andmebaasid.service.VoistkonnadService;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,12 +36,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "user")
 @Controller()
 public class UserController {
+    Logger log = LoggerFactory.logger(UserController.class);
     
     @Autowired
     private VoistkonnadService voistkonnadService;
     
-    @Autowired
-    private VoistkondadeController voistkondadeController;
     
     @Autowired
     private SessionService sessionService;
@@ -67,6 +73,12 @@ public class UserController {
         String token = (String) session.getAttribute("token");
         sessionService.deleteSession(token);
         return "login";
+    }
+    
+    @ModelAttribute(value = "voistkondsActive")
+    private List<VVoistkondAktiivne> getVoistkondsActive(){
+        log.debug("Called for active voistkonds");
+        return voistkonnadService.getAllActiveVoistkonds();
     }
     
     @ExceptionHandler

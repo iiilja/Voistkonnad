@@ -9,6 +9,7 @@ import ee.andmebaasid.entity.Riik;
 import ee.andmebaasid.entity.Spordiala;
 import ee.andmebaasid.entity.VTootaja;
 import ee.andmebaasid.entity.VVoistkond;
+import ee.andmebaasid.entity.VVoistkondAktiivne;
 import ee.andmebaasid.entity.VoistkonnaSeisundiLiik;
 import java.util.List;
 
@@ -19,6 +20,8 @@ import java.util.List;
 public interface VoistkonnadService {
     public List<VVoistkond> getAllVoistkonds();
     public VVoistkond findVoistkondById(int id);
+   
+    public List<VVoistkondAktiivne> getAllActiveVoistkonds();
     
     public List<Riik> getRiiks();
     public List<Riik> getRiiksByVoistkond(VVoistkond voistkond);

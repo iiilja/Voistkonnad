@@ -9,7 +9,7 @@
     <body>
 
 
-        <a href='s'>servlet</a> <br>
+        <a href='../voistkonnad/s'>Voiskonnad</a><br/>
         <p color="red">${error}</p>
         <form action='s?action=create' method=POST>
             <table bgcolor='#000000' border=0 cellpadding=0 cellspacing=0>
