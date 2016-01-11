@@ -43,7 +43,6 @@ public class VoistkondadeController {
     @RequestMapping(value = "/s", method = RequestMethod.GET)
     public ModelAndView getAll(@RequestParam(required = false) Integer id,
             String token) {
-        System.out.println("getAll token = " + token);
         if (id != null) {
             System.out.println("byId " + id);
             Map<String, Object> model = new HashMap<>();
@@ -71,17 +70,18 @@ public class VoistkondadeController {
             @RequestParam String email,
             @RequestParam String kirjeldus,
             @RequestParam(required = false) Integer id,
-            HttpServletRequest request,
-            HttpServletResponse response) throws JSONException{
+            HttpServletRequest request) throws JSONException{
         
         if (action != null) {
+            Session session = (Session) request.getAttribute("userSession");
+            VTootaja tootaja = session.getTootaja();
             Map<String, Object> model = new HashMap<>();
             String message = "";
             boolean ok = true;
             switch (action){
                 case "update":
                     try {
-                        ok = voistkonnadService.updateVoistkond(id,seisundiLiik, nimetus, spordialaKood,riikKood, 1, email, kirjeldus);
+                        ok = voistkonnadService.updateVoistkond(id,seisundiLiik, nimetus, spordialaKood,riikKood, tootaja.getTootajaId(), email, kirjeldus);
                     } catch ( Exception e){
                         message = e.getCause().getLocalizedMessage();
                         message = message.substring(0, message.indexOf("Where"));
@@ -95,7 +95,7 @@ public class VoistkondadeController {
                     return new ModelAndView("voistkond", model);//getWithID(id);
                 case "create":   
                     try{
-                        id = voistkonnadService.createVoistkond(nimetus, spordialaKood, riikKood, 1, email, kirjeldus);
+                        id = voistkonnadService.createVoistkond(nimetus, spordialaKood, riikKood, tootaja.getTootajaId(), email, kirjeldus);
                     } catch (Exception e){
                         message = e.getCause().getLocalizedMessage();
                         message = message.substring(0, message.indexOf("Where"));

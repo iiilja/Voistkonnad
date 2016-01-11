@@ -23,7 +23,13 @@ public class SessionService{
     }
     
     public Session findSession(String token){
-        Session s = sessions.get(token);
-        return s;
+        System.out.println("Sessions size is = " + sessions.size() + " searching token " + token);
+        return sessions.get(token);
+    }
+    
+    public void deleteSession (String token){
+        sessions.remove(token);
+        System.out.println("Trying to remove " + token);
+        System.out.println("Sessions size after deleting is = " + sessions.size());
     }
 }

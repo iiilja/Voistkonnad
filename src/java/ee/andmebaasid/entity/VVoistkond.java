@@ -56,6 +56,8 @@ public class VVoistkond implements Serializable {
     private String eMail;
     @Column(name = "kirjeldus")
     private String kirjeldus;
+    @Column(name = "muutja")
+    private String muutja;
     @Column(name = "reg_aeg")
     @Temporal(TemporalType.TIMESTAMP)
     private Date regAeg;
@@ -106,9 +108,17 @@ public class VVoistkond implements Serializable {
     public String getEMail() {
         return eMail;
     }
-
+    
     public void setEMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    public String getMuutja() {
+        return muutja;
+    }
+
+    public void setMuutja(String muutja) {
+        this.muutja = muutja;
     }
 
     public String getKirjeldus() {

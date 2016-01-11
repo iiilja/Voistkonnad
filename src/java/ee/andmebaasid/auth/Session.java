@@ -21,4 +21,11 @@ public class Session {
     public VTootaja getTootaja() {
         return tootaja;
     }
+
+    @Override
+    public String toString() {
+        return tootaja.getEesnimi() + tootaja.getPerenimi();
+    }
+    
+    
 }

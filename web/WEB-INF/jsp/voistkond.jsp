@@ -8,8 +8,7 @@
     </head>
     <body>
 
-
-        <a href='s'>servlet</a> <br>
+        <a href='../voistkonnad/s'>Voiskonnad</a> | <a href='../voistkonnad/new'>Create new</a> <br>
         <p color="red">${error}</p>
         <form action='s?action=update' method=POST>
             <table bgcolor='#000000' border=0 cellpadding=0 cellspacing=0>
