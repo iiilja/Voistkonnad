@@ -1,0 +1,23 @@
+<div class="panel panel-teams">
+    <h2>Aktiivsed võistkonnad</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nimi</th>
+            <th>Riik</th>
+            <th>Sport</th>
+            <th>E-mail</th>
+            <th>Kirjeldus</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="team in teams">
+            <td>{{team.name}}</td>
+            <td>{{team.country}}</td>
+            <td>{{team.sport}}</td>
+            <td>{{team.email}}</td>
+            <td>{{team.description}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

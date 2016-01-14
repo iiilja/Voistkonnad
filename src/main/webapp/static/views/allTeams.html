@@ -1,0 +1,29 @@
+<div class="panel panel-teams">
+    <h2>Võistkondade haldamine</h2>
+        <table class="table">
+    <thead>
+    <tr>
+        <th>Nimi</th>
+        <th>Riik</th>
+        <th>Sport</th>
+        <th>E-mail</th>
+        <th>Leisundiliik</th>
+        <th>Reg. kp.</th>
+        <th>Kirjeldus</th>
+        <th>Muutja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="team in teams">
+        <td>{{team.name}}</td>
+        <td>{{team.country}}</td>
+        <td>{{team.sport}}</td>
+        <td>{{team.email}}</td>
+        <td>{{team.state}}</td>
+        <td>{{team.regDate}}</td>
+        <td>{{team.description}}</td>
+        <td>{{team.changer}}</td>
+    </tr>
+    </tbody>
+</table>
+</div>
