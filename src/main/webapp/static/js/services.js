@@ -5,8 +5,10 @@ services.factory('Teams', ['$resource',
         return $resource('',{},{
                 get_active: {method: 'GET', url: apiEndpoint + 'teams/active/', isArray:true},
                 get_all: {method: 'GET', url: apiEndpoint + 'teams/all/', isArray:true},
+                get_all_states: {method: 'GET', url: apiEndpoint + 'teams/states/', isArray:true},
                 create: {method: 'POST', url: apiEndpoint + 'create/', params: { data : '@data'}},
-                update: {method: 'POST', url: apiEndpoint + 'teams/:teamId', params: { data : '@data', teamId : '@teamId'}}
+                update: {method: 'POST', url: apiEndpoint + 'teams/:teamId', params: { data : '@data', teamId : '@teamId'}},
+                change_state: {method: 'POST', url: apiEndpoint + 'teams/:teamId/state', params: { data : '@data', teamId : '@teamId'}}
             });}]);
 
 services.factory("sysMessage", ['toaster','$filter', function (toaster, $filter) {

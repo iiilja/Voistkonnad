@@ -66,16 +66,16 @@ public class TeamsServiceImpl implements TeamsService {
     
 
     @Override
-    public List<VoistkonnaSeisundiLiik> getStates() {
+    public List<TeamState> getTeamStates() {
         Session session = sessionFactory.getCurrentSession();
-        return Collections.checkedList(session.getNamedQuery("VoistkonnaSeisundiLiik.findAll").list(), VoistkonnaSeisundiLiik.class);
+        return Collections.checkedList(session.getNamedQuery("TeamState.findAll").list(), TeamState.class);
     }
 
     @Override
-    public List<VoistkonnaSeisundiLiik> getStatesForTeam(TeamFull voistkond) {
-        List<VoistkonnaSeisundiLiik> seisundiLiiks = getStates();
-        for (VoistkonnaSeisundiLiik seisundiLiik : seisundiLiiks) {
-            if (seisundiLiik.getNimetus().equals(voistkond.getState())) {
+    public List<TeamState> getTeamStatesForTeam(TeamFull voistkond) {
+        List<TeamState> seisundiLiiks = getTeamStates();
+        for (TeamState seisundiLiik : seisundiLiiks) {
+            if (seisundiLiik.getStateName().equals(voistkond.getState())) {
                 seisundiLiik.setSelected(true);
             }
         }
@@ -111,6 +111,19 @@ public class TeamsServiceImpl implements TeamsService {
         procedureCall.registerParameter(6, Integer.class, ParameterMode.IN).bindValue(tootajaId);
         procedureCall.registerParameter(7, String.class, ParameterMode.IN).bindValue(email);
         procedureCall.registerParameter(8, String.class, ParameterMode.IN).bindValue(kirjeldus);
+
+        ResultSetOutput out = (ResultSetOutput) procedureCall
+                .getOutputs().getCurrent();
+        return (boolean) out.getSingleResult();
+    }
+
+    @Override
+    public boolean updateTeamStatus(int teamId, short stateCode, int changerWorker) {
+        Session session = sessionFactory.getCurrentSession();
+        ProcedureCall procedureCall = session.createStoredProcedureCall("muuda_voistkonna_seisundi_liik");
+        procedureCall.registerParameter(1, Integer.TYPE, ParameterMode.IN).bindValue(teamId);
+        procedureCall.registerParameter(2, Short.TYPE, ParameterMode.IN).bindValue(stateCode);
+        procedureCall.registerParameter(6, Integer.TYPE, ParameterMode.IN).bindValue(changerWorker);
 
         ResultSetOutput out = (ResultSetOutput) procedureCall
                 .getOutputs().getCurrent();

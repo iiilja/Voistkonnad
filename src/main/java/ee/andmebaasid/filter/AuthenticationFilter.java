@@ -68,7 +68,8 @@ public class AuthenticationFilter implements Filter {
                 return;
             }
         }       
-        rs.sendRedirect(rq.getContextPath() + "/user/login");
+//        rs.sendRedirect(rq.getContextPath() + "/user/login");
+        rs.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         
     }
 

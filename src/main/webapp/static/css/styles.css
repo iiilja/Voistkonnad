@@ -160,5 +160,15 @@ h1,h2,h3,h4,h5,h6,p,a,div {font-family: 'Open Sans', sans-serif;}
 }
 .form-group {margin-bottom: 22px;}
 
+tr.team-active{
+    background-color:#D5F9BE;
+}
+tr.team-inactive{
+    background-color: #FEFFCC;
+}
+tr.team-retired{
+    background-color: #FFE9E9;
+}
+
 
 

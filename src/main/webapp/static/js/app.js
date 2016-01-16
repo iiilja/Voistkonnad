@@ -1,4 +1,5 @@
 var apiEndpoint = "http://localhost:8080/";
+//var apiEndpoint = "http://84.52.56.74:8080/voistkonnad/";
 
 var app = angular.module('voiskondadeApp', ['voiskondadeApp.services','ngRoute', 'ngSanitize', 'ui.bootstrap', 'toaster', 'ui.router']);
 
@@ -75,4 +76,26 @@ app.controller('AllTeamsController', ['$scope', 'Teams', 'sysMessage', '$rootSco
         Teams.get_all(function(response){
             $scope.teams = response;
         });
+        Teams.get_all_states(function(response){
+            $scope.teamStates = response;
+        });
+
+        $scope.getStatesForTeam = function(stateName){
+            if(stateName == "mitteaktiivne"){
+                return $.grep($scope.teamStates, function(state){
+                    return state.stateId != 3;
+                })
+            } else if(stateName == "laiali_saadetud"){
+                return $.grep($scope.teamStates, function(state){
+                    return state.stateId == 3;
+                })
+            } else {
+                return $scope.teamStates;
+            }
+        };
+        $scope.changeTeamState = function(team){
+            Teams.change_state({teamId:team.teamId, data:team.state}, function(response){
+
+            });
+        }
     }]);

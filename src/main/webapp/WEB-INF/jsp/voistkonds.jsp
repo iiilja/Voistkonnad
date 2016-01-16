@@ -8,13 +8,13 @@
     </head>
     <body>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <a href='../voistkonnad/s'>Voiskonnad</a> | <a href='../voistkonnad/new'>Create new</a> | <a href='../user/logout'>Logi valja</a><br>
+        <a href='../teams/s'>Voiskonnad</a> | <a href='../teams/new'>Create new</a> | <a href='../user/logout'>Logi valja</a><br>
         voistkonds list: 
         <br>
         <table border=1 cellpadding=2 cellspacing=1>
             <tr bgcolor='#cccccc'>
                 <td><STRONG> teamId&nbsp;</td>
-                <td><STRONG>name&nbsp;</td>
+                <td><STRONG>stateName&nbsp;</td>
                 <td><STRONG>sport&nbsp;</td>
                 <td><STRONG>country&nbsp;</td>
                 <td><STRONG>state&nbsp;</td>
@@ -28,7 +28,7 @@
             <c:forEach var="voistkond" items="${voistkonds}" >
                 <TR BGCOLOR='#FFFFFF' ><TD  nowrap>
                         &nbsp${voistkond.teamId}&nbsp;</TD>
-                    <TD>${voistkond.name}&nbsp</TD>
+                    <TD>${voistkond.stateName}&nbsp</TD>
                     <TD>${voistkond.sport}&nbsp</TD>
                     <TD>${voistkond.country}&nbsp</TD>
                     <TD>${voistkond.state}&nbsp</TD>

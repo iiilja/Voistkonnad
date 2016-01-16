@@ -5,13 +5,13 @@
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
     <filter> 
-        <filter-name>authenticationFilter</filter-name> 
+        <filter-name>authenticationFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
     </filter>
 
     <filter-mapping> 
-        <filter-name>authenticationFilter</filter-name> 
-        <url-pattern>/voistkonnad/*</url-pattern> 
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/voistkonnad/lalalal/*</url-pattern>
     </filter-mapping>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

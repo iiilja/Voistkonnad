@@ -23,13 +23,14 @@ public interface TeamsService {
     public List<Riik> getCountries();
     public List<Riik> getCountriesForTeam(TeamFull teamFull);
     
-    public List<VoistkonnaSeisundiLiik> getStates();
-    public List<VoistkonnaSeisundiLiik> getStatesForTeam(TeamFull teamFull);
+    public List<TeamState> getTeamStates();
+    public List<TeamState> getTeamStatesForTeam(TeamFull teamFull);
     
     public List<Sport> getSports();
     public List<Sport> getSportsForTeam(TeamFull teamFull);
 
     public boolean updateTeam(int id, short stateCode, String name, short sportCode, String countryCode, int changerWorker, String email, String description);
+    public boolean updateTeamStatus(int teamId, short stateCode, int changerWorker);
     public Integer createTeam(String name, short sportCode, String countryCode, int changerWorker, String email, String description);
     
     public boolean login(String name, String password);

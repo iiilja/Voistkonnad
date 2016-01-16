@@ -5,6 +5,7 @@ import ee.andmebaasid.auth.SessionService;
 import ee.andmebaasid.entity.VTootaja;
 import ee.andmebaasid.entity.TeamFull;
 import ee.andmebaasid.entity.TeamActive;
+import ee.andmebaasid.entity.TeamState;
 import ee.andmebaasid.service.TeamsService;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
@@ -46,7 +47,7 @@ public class TeamsController {
             model.put("voistkond", voistkond);
             model.put("spordialas", teamsService.getSportsForTeam(voistkond));
             model.put("riiks", teamsService.getCountriesForTeam(voistkond));
-            model.put("seisundiLiiks", teamsService.getStatesForTeam(voistkond));
+            model.put("seisundiLiiks", teamsService.getTeamStatesForTeam(voistkond));
             return new ModelAndView("voistkond", model);//getWithID(id);
         }
         List<TeamFull> voistkonds = teamsService.getAllTeams();
@@ -85,7 +86,7 @@ public class TeamsController {
                     model.put("voistkond", voistkond);
                     model.put("spordialas", teamsService.getSportsForTeam(voistkond));
                     model.put("riiks", teamsService.getCountriesForTeam(voistkond));
-                    model.put("seisundiLiiks", teamsService.getStatesForTeam(voistkond));
+                    model.put("seisundiLiiks", teamsService.getTeamStatesForTeam(voistkond));
                     model.put("error" , ok ? message : "not found");
                     return new ModelAndView("voistkond", model);//getWithID(id);
                 case "create":   
@@ -104,7 +105,7 @@ public class TeamsController {
                     model.put("voistkond", voistkond);
                     model.put("spordialas", teamsService.getSportsForTeam(voistkond));
                     model.put("riiks", teamsService.getCountriesForTeam(voistkond));
-                    model.put("seisundiLiiks", teamsService.getStatesForTeam(voistkond));
+                    model.put("seisundiLiiks", teamsService.getTeamStatesForTeam(voistkond));
                     model.put("error" , id!=null ? message : "not found");
                     return new ModelAndView("voistkond", model);//getWithID(id);
             }
@@ -132,6 +133,20 @@ public class TeamsController {
     @RequestMapping(value = "all")
     public @ResponseBody List<TeamFull> getAllFull(){
         return teamsService.getAllTeams();
+    }
+
+    @RequestMapping(value = "states")
+    public @ResponseBody List<TeamState> getAllStates(){
+        return teamsService.getTeamStates();
+    }
+
+    @RequestMapping(value = "{teamId}/state" ,method = RequestMethod.POST)
+    public @ResponseBody boolean getAllStates(
+            @PathVariable Integer teamId, @RequestParam short teamStateCode,
+            HttpServletRequest request){
+        Session session = (Session) request.getAttribute("userSession");
+        VTootaja tootaja = session.getTootaja();
+        return teamsService.updateTeamStatus(teamId, teamStateCode, tootaja.getTootajaId());
     }
 
 

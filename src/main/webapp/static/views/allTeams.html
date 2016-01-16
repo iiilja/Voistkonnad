@@ -14,12 +14,18 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="team in teams">
-        <td>{{team.name}}</td>
+    <tr ng-repeat="team in teams" ng-class="{'team-active': team.state =='aktiivne' ,
+        'team-inactive': team.state =='mitteaktiivne', 'team-retired': team.state =='laiali_saadetud'}">
+        <td>{{team.stateName}}</td>
         <td>{{team.country}}</td>
         <td>{{team.sport}}</td>
         <td>{{team.email}}</td>
-        <td>{{team.state}}</td>
+        <td>
+            <select
+                    ng-model="team.state"
+                    ng-options="state.stateName as state.stateName for state in getStatesForTeam(team.state)"
+                    ng-change="changeTeamState(team)"></select>
+        </td>
         <td>{{team.regDate}}</td>
         <td>{{team.description}}</td>
         <td>{{team.changer}}</td>
