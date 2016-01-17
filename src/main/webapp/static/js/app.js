@@ -1,4 +1,4 @@
-var apiEndpoint = "http://localhost:8080/";
+var apiEndpoint = "http://localhost:8080/voistkonnad/";
 //var apiEndpoint = "http://84.52.56.74:8080/voistkonnad/";
 
 var app = angular.module('voiskondadeApp', ['voiskondadeApp.services','ngRoute', 'ngSanitize', 'ui.bootstrap', 'toaster', 'ui.router']);
@@ -55,11 +55,27 @@ app.controller('LeftMenuController', ['$scope', '$location', '$http', '$rootScop
     }]);
 
 
-app.controller('TopMenuController', ['$scope', '$location', '$http', '$rootScope',
-    function ($scope, $location, $http, $rootScope) {
+app.controller('TopMenuController', ['$scope', '$rootScope', 'UserService',
+    function ($scope, $rootScope, UserService) {
         $rootScope.bodyClass = 'content_bg';
-        $rootScope.left_menu_active = '';
-        $scope.compName = "Small Ambitious company";
+        $scope.compName = "Võistkondade register";
+
+        $scope.authorised = false;
+
+        UserService.check(function(){
+            $scope.authorised = true;
+        },function(){
+            console.log("unauthorised");
+        });
+
+        $scope.login = function(username, password){
+            UserService.login({login: username, password: password}, function(response){
+                $scope.worker = response;
+                $scope.authorised = true;
+            }, function(){
+
+            });
+        };
     }]);
 
 app.controller('MainController', ['$scope', 'Teams', 'sysMessage', '$rootScope',
@@ -83,18 +99,19 @@ app.controller('AllTeamsController', ['$scope', 'Teams', 'sysMessage', '$rootSco
         $scope.getStatesForTeam = function(stateName){
             if(stateName == "mitteaktiivne"){
                 return $.grep($scope.teamStates, function(state){
-                    return state.stateId != 3;
+                    return state.stateCode != 3;
                 })
             } else if(stateName == "laiali_saadetud"){
                 return $.grep($scope.teamStates, function(state){
-                    return state.stateId == 3;
+                    return state.stateCode == 3;
                 })
             } else {
                 return $scope.teamStates;
             }
         };
         $scope.changeTeamState = function(team){
-            Teams.change_state({teamId:team.teamId, data:team.state}, function(response){
+            var teamState = $.grep($scope.teamStates, function(state){return state.stateName == team.state})[0];
+            Teams.change_state({teamId:team.teamId, data:teamState.stateCode}, function(response){
 
             });
         }

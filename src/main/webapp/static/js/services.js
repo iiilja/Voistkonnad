@@ -8,7 +8,14 @@ services.factory('Teams', ['$resource',
                 get_all_states: {method: 'GET', url: apiEndpoint + 'teams/states/', isArray:true},
                 create: {method: 'POST', url: apiEndpoint + 'create/', params: { data : '@data'}},
                 update: {method: 'POST', url: apiEndpoint + 'teams/:teamId', params: { data : '@data', teamId : '@teamId'}},
-                change_state: {method: 'POST', url: apiEndpoint + 'teams/:teamId/state', params: { data : '@data', teamId : '@teamId'}}
+                change_state: {method: 'POST', url: apiEndpoint + 'teams/:teamId/state', params: { teamStateCode : '@data', teamId : '@teamId'}}
+            });}]);
+
+services.factory('UserService', ['$resource',
+    function ($resource) {
+        return $resource('',{},{
+                check: {method: 'GET', url: apiEndpoint + 'user/check/'},
+                login: {method: 'GET', url: apiEndpoint + 'user/login/', params:{login:'@login', password:'@password'}}
             });}]);
 
 services.factory("sysMessage", ['toaster','$filter', function (toaster, $filter) {

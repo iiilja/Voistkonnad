@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequestMapping(value = "teams")
-@Controller()
+@Controller
 public class TeamsController {
     Logger log = LoggerFactory.logger(TeamsController.class);
 

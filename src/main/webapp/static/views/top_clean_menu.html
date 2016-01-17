@@ -1,10 +1,18 @@
-<!-- <div class="row">
-    <span class="pull-right">
-    	
-        <span ng-click="change_language('lv')" class="lang-lg language_button" lang="lv"></span>
-        <span ng-click="change_language('et')" class="lang-lg language_button" lang="et"></span>
-        <span ng-click="change_language('ru')" class="lang-lg language_button" lang="ru"></span>
-        <span ng-click="change_language('en')" class="lang-lg language_button" lang="en"></span>
-    	
+<div>
+    <span ng-show="!authorised" class="pull-right">
+
+        <form class="navbar-form navbar-right" role="search" ng-submit="login(username,password)">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="username" placeholder="Kasutajanimi">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" ng-model="password" placeholder="Parool">
+            </div>
+            <button type="submit" class="btn btn-default">Logi sisse</button>
+        </form>
     </span>
-</div> -->
+    <span ng-show="authorised" class="pull-right">
+
+        <div>{{worker.eesnimi}} {{worker.perenimi}}</div>
+    </span>
+</div>

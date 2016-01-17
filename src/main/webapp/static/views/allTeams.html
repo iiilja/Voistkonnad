@@ -9,7 +9,7 @@
         <th>E-mail</th>
         <th>Leisundiliik</th>
         <th>Reg. kp.</th>
-        <th>Kirjeldus</th>
+        <th>Kirjeldus</th> 
         <th>Muutja</th>
     </tr>
     </thead>
@@ -21,7 +21,7 @@
         <td>{{team.sport}}</td>
         <td>{{team.email}}</td>
         <td>
-            <select
+            <select 
                     ng-model="team.state"
                     ng-options="state.stateName as state.stateName for state in getStatesForTeam(team.state)"
                     ng-change="changeTeamState(team)"></select>
