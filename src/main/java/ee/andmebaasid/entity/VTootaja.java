@@ -28,8 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VTootaja.findByTootajaId", query = "SELECT v FROM VTootaja v WHERE v.tootajaId = :tootajaId"),
     @NamedQuery(name = "VTootaja.findByEMail", query = "SELECT v FROM VTootaja v WHERE v.eMail = :eMail"),
     @NamedQuery(name = "VTootaja.findByKasutajanimi", query = "SELECT v FROM VTootaja v WHERE v.kasutajanimi = :kasutajanimi"),
-    @NamedQuery(name = "VTootaja.findByEesnimi", query = "SELECT v FROM VTootaja v WHERE v.eesnimi = :eesnimi"),
-    @NamedQuery(name = "VTootaja.findByPerenimi", query = "SELECT v FROM VTootaja v WHERE v.perenimi = :perenimi"),
     @NamedQuery(name = "VTootaja.findBySeisundiLiik", query = "SELECT v FROM VTootaja v WHERE v.seisundiLiik = :seisundiLiik"),
     @NamedQuery(name = "VTootaja.findByAmet", query = "SELECT v FROM VTootaja v WHERE v.amet = :amet")})
 public class VTootaja implements Serializable {
@@ -43,9 +41,9 @@ public class VTootaja implements Serializable {
     @Column(name = "kasutajanimi")
     private String kasutajanimi;
     @Column(name = "eesnimi")
-    private String eesnimi;
+    private String firstName;
     @Column(name = "perenimi")
-    private String perenimi;
+    private String lastName;
     @Basic(optional = false)
     @Column(name = "seisundi_liik")
     private String seisundiLiik;
@@ -75,20 +73,20 @@ public class VTootaja implements Serializable {
         this.eMail = eMail;
     }
 
-    public String getEesnimi() {
-        return eesnimi;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEesnimi(String eesnimi) {
-        this.eesnimi = eesnimi;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getPerenimi() {
-        return perenimi;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPerenimi(String perenimi) {
-        this.perenimi = perenimi;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getSeisundiLiik() {

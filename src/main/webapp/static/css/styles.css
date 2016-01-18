@@ -170,5 +170,13 @@ tr.team-retired{
     background-color: #FFE9E9;
 }
 
+.top-menu.user-name{
+    margin-right: 10px;
+    color: #CCD098;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
 
 

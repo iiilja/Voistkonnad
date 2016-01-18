@@ -4,7 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>ee.andmebaasid.entity.VoistkonnaSeisundiLiik</class>
     <class>ee.andmebaasid.entity.Sport</class>
-    <class>ee.andmebaasid.entity.Riik</class>
+    <class>ee.andmebaasid.entity.Country</class>
     <class>ee.andmebaasid.entity.Amet</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>

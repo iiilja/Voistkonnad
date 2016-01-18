@@ -21,16 +21,16 @@
                                 <td>&nbsp;<b><font color='#0000ff'>
                                         <select stateName="sportCode">
                                             <c:forEach var="spordiala" items="${spordialas}" >
-                                                <option value="${spordiala.sportCode}" ${spordiala.selected ? "selected": ""}>${spordiala.spotrName}</option>
+                                                <option value="${spordiala.sportCode}" ${spordiala.selected ? "selected": ""}>${spordiala.sportName}</option>
                                             </c:forEach>
                                         </select>
                                         </font></b></TD></tr>
                             <TR BGCOLOR='#ffffff'>
                                 <td BGCOLOR='#cccccc' nowrap>country</td>
                                 <td>&nbsp;<b><font color='#0000ff'>
-                                        <select stateName="riikKood">
-                                            <c:forEach var="riik" items="${riiks}" >
-                                                <option value="${riik.riikKood}" ${riik.selected ? "selected": ""}>${riik.nimetus}</option>
+                                        <select stateName="countryCode">
+                                            <c:forEach var="country" items="${countries}" >
+                                                <option value="${country.countryCode}" ${country.selected ? "selected": ""}>${country.countryName}</option>
                                             </c:forEach>
                                         </select>
                                         </font></b>

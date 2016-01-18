@@ -1,4 +1,4 @@
-<div class="panel panel-teams">
+<div class="panel-teams">
     <h2>Aktiivsed võistkonnad</h2>
     <table class="table">
         <thead>
@@ -11,8 +11,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="team in teams">
-            <td>{{team.stateName}}</td>
+        <tr ng-repeat="team in teams" class="team-active">
+            <td>{{team.name}}</td>
             <td>{{team.country}}</td>
             <td>{{team.sport}}</td>
             <td>{{team.email}}</td>

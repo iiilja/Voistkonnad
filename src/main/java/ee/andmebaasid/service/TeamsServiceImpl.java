@@ -48,20 +48,20 @@ public class TeamsServiceImpl implements TeamsService {
     }
 
     @Override
-    public List<Riik> getCountries() {
+    public List<Country> getCountries() {
         Session session = sessionFactory.getCurrentSession();
-        return Collections.checkedList(session.getNamedQuery("Riik.findAll").list(), Riik.class);
+        return Collections.checkedList(session.getNamedQuery("Country.findAll").list(), Country.class);
     }
 
     @Override
-    public List<Riik> getCountriesForTeam(TeamFull voistkond) {
-        List<Riik> riiks = getCountries();
-        for (Riik riik : riiks) {
-            if (riik.getNimetus().equals(voistkond.getCountry())) {
-                riik.setSelected(true);
+    public List<Country> getCountriesForTeam(TeamFull voistkond) {
+        List<Country> countries = getCountries();
+        for (Country country : countries) {
+            if (country.getCountryName().equals(voistkond.getCountry())) {
+                country.setSelected(true);
             }
         }
-        return riiks;
+        return countries;
     }
     
 
@@ -92,7 +92,7 @@ public class TeamsServiceImpl implements TeamsService {
     public List<Sport> getSportsForTeam(TeamFull voistkond) {
         List<Sport> spordialas = getSports();
         for (Sport spordiala : spordialas) {
-            if (spordiala.getSpotrName().equals(voistkond.getSport())) {
+            if (spordiala.getSportName().equals(voistkond.getSport())) {
                 spordiala.setSelected(true);
             }
         }
@@ -123,7 +123,7 @@ public class TeamsServiceImpl implements TeamsService {
         ProcedureCall procedureCall = session.createStoredProcedureCall("muuda_voistkonna_seisundi_liik");
         procedureCall.registerParameter(1, Integer.TYPE, ParameterMode.IN).bindValue(teamId);
         procedureCall.registerParameter(2, Short.TYPE, ParameterMode.IN).bindValue(stateCode);
-        procedureCall.registerParameter(6, Integer.TYPE, ParameterMode.IN).bindValue(changerWorker);
+        procedureCall.registerParameter(3, Integer.TYPE, ParameterMode.IN).bindValue(changerWorker);
 
         ResultSetOutput out = (ResultSetOutput) procedureCall
                 .getOutputs().getCurrent();

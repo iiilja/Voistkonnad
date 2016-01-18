@@ -1,0 +1,48 @@
+<div class="panel-teams">
+    <h2>Võistkonna lisamine</h2>
+    <form class="form-horizontal" ng-submit="createTeam()">
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Võistkonna nimi *</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="team.teamName" class="form-control" id="name" placeholder="Võistkonna nimi" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="countrySelect" class="col-sm-2 control-label">Riik *</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="countrySelect"
+                        ng-model="team.countryCode"
+                        ng-options="country.countryCode as country.countryName for country in countries" required>
+                    <option value="">Ei ole valitud</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sportSelect" class="col-sm-2 control-label">Sport *</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="sportSelect"
+                        ng-model="team.sportCode"
+                        ng-options="sport.sportCode as sport.sportName for sport in sports" required>
+                    <option value="">Ei ole valitud</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">Email *</label>
+            <div class="col-sm-10">
+                <input type="email" ng-model="team.email" class="form-control" id="inputEmail" placeholder="Email" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Kirjeldus</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="team.description" class="form-control" id="description" placeholder="Kirjeldus">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">Lisa</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -25,7 +25,7 @@ import java.io.StringWriter;
  *
  * @author iljad
  */
-@WebFilter(filterName = "authenticationFilter", urlPatterns = {"/voistkonnad/*"})
+@WebFilter(filterName = "authenticationFilter", urlPatterns = {"/teams/*"})
 public class AuthenticationFilter implements Filter {
     Logger log = LoggerFactory.logger(AuthenticationFilter.class);
     

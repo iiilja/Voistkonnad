@@ -20,8 +20,8 @@ public interface TeamsService {
    
     public List<TeamActive> getAllActiveTeams();
     
-    public List<Riik> getCountries();
-    public List<Riik> getCountriesForTeam(TeamFull teamFull);
+    public List<Country> getCountries();
+    public List<Country> getCountriesForTeam(TeamFull teamFull);
     
     public List<TeamState> getTeamStates();
     public List<TeamState> getTeamStatesForTeam(TeamFull teamFull);

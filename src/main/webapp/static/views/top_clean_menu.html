@@ -11,8 +11,8 @@
             <button type="submit" class="btn btn-default">Logi sisse</button>
         </form>
     </span>
-    <span ng-show="authorised" class="pull-right">
-
-        <div>{{worker.eesnimi}} {{worker.perenimi}}</div>
+    <span ng-show="authorised" class="navbar-form navbar-right">
+        <div class="form-group top-menu user-name">{{worker.firstName}} {{worker.lastName}}</div>
+        <button ng-click="logout()" class="btn btn-default">Logi välja</button>
     </span>
 </div>

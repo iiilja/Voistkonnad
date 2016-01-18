@@ -1,4 +1,4 @@
-<div class="panel panel-teams">
+<div class="panel-teams">
     <h2>Võistkondade haldamine</h2>
         <table class="table">
     <thead>
@@ -11,17 +11,18 @@
         <th>Reg. kp.</th>
         <th>Kirjeldus</th> 
         <th>Muutja</th>
+        <th>Edit</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="team in teams" ng-class="{'team-active': team.state =='aktiivne' ,
         'team-inactive': team.state =='mitteaktiivne', 'team-retired': team.state =='laiali_saadetud'}">
-        <td>{{team.stateName}}</td>
+        <td>{{team.name}}</td>
         <td>{{team.country}}</td>
         <td>{{team.sport}}</td>
         <td>{{team.email}}</td>
         <td>
-            <select 
+            <select class="form-control"
                     ng-model="team.state"
                     ng-options="state.stateName as state.stateName for state in getStatesForTeam(team.state)"
                     ng-change="changeTeamState(team)"></select>
@@ -29,6 +30,7 @@
         <td>{{team.regDate}}</td>
         <td>{{team.description}}</td>
         <td>{{team.changer}}</td>
+        <td><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></td>
     </tr>
     </tbody>
 </table>

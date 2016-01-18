@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -40,13 +41,14 @@ public class UserController {
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public @ResponseBody VTootaja login(@RequestParam String login, @RequestParam String password,
-            HttpServletResponse response,HttpSession session) throws IOException{
+            HttpServletRequest request, HttpServletResponse response) throws IOException{
         boolean loginOk = teamsService.login(login, password);
         if (loginOk) {
             VTootaja tootaja = teamsService.getWorkerByLogin(login);
             String token = UUID.randomUUID().toString();
             tootaja.setToken(token);
             sessionService.addSession(token, new Session(tootaja));
+            HttpSession session = request.getSession();
             session.setAttribute("token", token);
             return tootaja;
         } else {
@@ -56,15 +58,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public @ResponseBody String check(HttpServletResponse response, HttpSession session) throws IOException{
-        Session userSession = (Session) session.getAttribute("userSession");
+    public @ResponseBody VTootaja check(HttpServletResponse response, HttpSession httpSession) throws IOException{
+        Session userSession = (Session) httpSession.getAttribute("userSession");
+        String token = (String) httpSession.getAttribute("token");
+        VTootaja tootaja = null;
         if (userSession != null) {
-            VTootaja tootaja = userSession.getTootaja();
-            return tootaja.getEesnimi() + " " + tootaja.getPerenimi();
-        } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return null;
+            tootaja = userSession.getTootaja();
+        } else if (token != null){
+            userSession = sessionService.findSession(token);
+            if (userSession != null){
+                tootaja = userSession.getTootaja();
+            }
         }
+        if (tootaja == null){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        }
+        return tootaja;
+    }
+
+    @RequestMapping(value = "logout")
+    public void logout(HttpSession httpSession){
+        String token = (String) httpSession.getAttribute("token");
+        sessionService.deleteSession(token);
     }
     
 

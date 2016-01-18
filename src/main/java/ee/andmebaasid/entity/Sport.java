@@ -34,7 +34,7 @@ public class Sport implements Serializable {
     private Short sportCode;
     @Basic(optional = false)
     @Column(name = "nimetus")
-    private String spotrName;
+    private String sportName;
     @Column(name = "kirjeldus")
     private String description;
     
@@ -48,9 +48,9 @@ public class Sport implements Serializable {
         this.sportCode = sportCode;
     }
 
-    public Sport(Short sportCode, String spotrName) {
+    public Sport(Short sportCode, String sportName) {
         this.sportCode = sportCode;
-        this.spotrName = spotrName;
+        this.sportName = sportName;
     }
 
     public Short getSportCode() {
@@ -61,12 +61,12 @@ public class Sport implements Serializable {
         this.sportCode = sportCode;
     }
 
-    public String getSpotrName() {
-        return spotrName;
+    public String getSportName() {
+        return sportName;
     }
 
-    public void setSpotrName(String spotrName) {
-        this.spotrName = spotrName;
+    public void setSportName(String sportName) {
+        this.sportName = sportName;
     }
 
     public String getDescription() {

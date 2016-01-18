@@ -27,9 +27,9 @@
                             <TR BGCOLOR='#ffffff'>
                                 <td BGCOLOR='#cccccc' nowrap>country</td>
                                 <td>&nbsp;<b><font color='#0000ff'>
-                                        <select stateName="riikKood">
-                                            <c:forEach var="riik" items="${riiks}" >
-                                                <option value="${riik.riikKood}" ${riik.selected ? "selected": ""}>${riik.stateName}</option>
+                                        <select stateName="countryCode">
+                                            <c:forEach var="country" items="${countries}" >
+                                                <option value="${country.countryCode}" ${country.selected ? "selected": ""}>${country.stateName}</option>
                                             </c:forEach>
                                         </select>
                                         </font></b>

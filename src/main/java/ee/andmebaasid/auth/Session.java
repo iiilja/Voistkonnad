@@ -24,7 +24,7 @@ public class Session {
 
     @Override
     public String toString() {
-        return tootaja.getEesnimi() + tootaja.getPerenimi();
+        return tootaja.getFirstName() + tootaja.getLastName();
     }
     
     

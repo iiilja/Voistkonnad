@@ -24,60 +24,57 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "riik")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Riik.findAll", query = "SELECT r FROM Riik r"),
-    @NamedQuery(name = "Riik.findByRiikKood", query = "SELECT r FROM Riik r WHERE r.riikKood = :riikKood"),
-    @NamedQuery(name = "Riik.findByNimetus", query = "SELECT r FROM Riik r WHERE r.nimetus = :nimetus"),
-    @NamedQuery(name = "Riik.findByKirjeldus", query = "SELECT r FROM Riik r WHERE r.kirjeldus = :kirjeldus")})
-public class Riik implements Serializable {
+    @NamedQuery(name = "Country.findAll", query = "SELECT r FROM Country r")})
+public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "riik_kood")
-    private String riikKood;
+    private String countryCode;
     @Basic(optional = false)
     @Column(name = "nimetus")
-    private String nimetus;
+    private String countryName;
     @Column(name = "kirjeldus")
-    private String kirjeldus;
+    private String description;
     
     @Transient
     private boolean selected;
 
-    public Riik() {
+    public Country() {
     }
 
-    public Riik(String riikKood) {
-        this.riikKood = riikKood;
+    public Country(String countryCode) {
+        this.countryCode = countryCode;
     }
 
-    public Riik(String riikKood, String nimetus) {
-        this.riikKood = riikKood;
-        this.nimetus = nimetus;
+    public Country(String countryCode, String countryName) {
+        this.countryCode = countryCode;
+        this.countryName = countryName;
     }
 
-    public String getRiikKood() {
-        return riikKood;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setRiikKood(String riikKood) {
-        this.riikKood = riikKood;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
-    public String getNimetus() {
-        return nimetus;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setNimetus(String nimetus) {
-        this.nimetus = nimetus;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 
-    public String getKirjeldus() {
-        return kirjeldus;
+    public String getDescription() {
+        return description;
     }
 
-    public void setKirjeldus(String kirjeldus) {
-        this.kirjeldus = kirjeldus;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isSelected() {
@@ -93,18 +90,18 @@ public class Riik implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (riikKood != null ? riikKood.hashCode() : 0);
+        hash += (countryCode != null ? countryCode.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Riik)) {
+        if (!(object instanceof Country)) {
             return false;
         }
-        Riik other = (Riik) object;
-        if ((this.riikKood == null && other.riikKood != null) || (this.riikKood != null && !this.riikKood.equals(other.riikKood))) {
+        Country other = (Country) object;
+        if ((this.countryCode == null && other.countryCode != null) || (this.countryCode != null && !this.countryCode.equals(other.countryCode))) {
             return false;
         }
         return true;
@@ -112,7 +109,7 @@ public class Riik implements Serializable {
 
     @Override
     public String toString() {
-        return "ee.idu0020.entity.Riik[ riikKood=" + riikKood + " ]";
+        return "ee.idu0020.entity.Country[ countryCode=" + countryCode + " ]";
     }
     
 }
