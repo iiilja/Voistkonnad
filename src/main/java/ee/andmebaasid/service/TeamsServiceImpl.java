@@ -37,8 +37,8 @@ public class TeamsServiceImpl implements TeamsService {
     @Override
     public TeamFull findTeamById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return (TeamFull) session.getNamedQuery("TeamFull.findByVoistkondId")
-                .setParameter("voistkondId", id).uniqueResult();
+        return (TeamFull) session.getNamedQuery("TeamFull.findByTeamId")
+                .setParameter("teamId", id).uniqueResult();
     }
     
     @Override

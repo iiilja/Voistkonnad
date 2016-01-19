@@ -5,9 +5,10 @@ services.factory('Teams', ['$resource',
         return $resource('',{},{
                 get_active: {method: 'GET', url: apiEndpoint + 'teams/active/', isArray:true},
                 get_all: {method: 'GET', url: apiEndpoint + 'teams/all/', isArray:true},
+                get_by_id: {method: 'GET', url: apiEndpoint + 'teams/:teamId/', params: {teamId : '@teamId'}},
                 get_all_states: {method: 'GET', url: apiEndpoint + 'teams/states/', isArray:true},
                 create: {method: 'POST', url: apiEndpoint + 'teams/create/', params: { team : '@team'}},
-                update: {method: 'POST', url: apiEndpoint + 'teams/:teamId', params: { data : '@data', teamId : '@teamId'}},
+                update: {method: 'POST', url: apiEndpoint + 'teams/:teamId', params: { team : '@team', teamId : '@teamId'}},
                 change_state: {method: 'POST', url: apiEndpoint + 'teams/:teamId/state', params: { teamStateCode : '@data', teamId : '@teamId'}},
                 get_sports: {method: 'POST', url: apiEndpoint + 'teams/sports', isArray:true},
                 get_countries: {method: 'GET', url: apiEndpoint + 'teams/countries', isArray:true}
@@ -27,7 +28,7 @@ services.factory("sysMessage", ['toaster','$filter', function (toaster, $filter)
             toaster.pop('success', 'Success', message);
         },
         error: function (message) {
-            toaster.pop('error', 'Error', message);
+            toaster.pop('error', 'Viga', message);
         }
     }
 }]);

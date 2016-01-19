@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/static/css/styles.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/static/js/app.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/static/js/services.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/static/views/activeTeams.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/static/views/allTeams.html" charset="UTF-8" />

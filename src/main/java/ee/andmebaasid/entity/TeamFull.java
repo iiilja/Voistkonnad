@@ -5,18 +5,12 @@
  */
 package ee.andmebaasid.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -26,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "v_voistkond")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TeamFull.findAll", query = "SELECT v FROM TeamFull v"),
+    @NamedQuery(name = "TeamFull.findAll", query = "SELECT v FROM TeamFull v ORDER BY state"),
     @NamedQuery(name = "TeamFull.findByTeamId", query = "SELECT v FROM TeamFull v WHERE v.teamId = :teamId")})
 public class TeamFull implements Serializable {
 
@@ -53,6 +47,7 @@ public class TeamFull implements Serializable {
     private String changer;
     @Column(name = "reg_aeg")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd")
     private Date regDate;
 
     public TeamFull() {

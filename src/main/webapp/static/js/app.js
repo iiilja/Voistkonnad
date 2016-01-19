@@ -22,6 +22,14 @@ app.config(['$routeProvider','$stateProvider','$urlRouterProvider', function ($r
                 "leftMenuView": {controller: 'LeftMenuController', templateUrl: 'views/left_menu.html' }
             }
         })
+        .state('editTeam', {
+            url: "/",
+            views: {
+                "topView": { controller: 'TopMenuController',templateUrl: './views/top_clean_menu.html' },
+                "contentView": { controller: 'EditTeamController',templateUrl: './views/editTeam.html' },
+                "leftMenuView": {controller: 'LeftMenuController', templateUrl: 'views/left_menu.html' }
+            }
+        })
         .state('allTeams', {
             url: "/",
             views: {
@@ -63,11 +71,11 @@ app.controller('LeftMenuController', ['$scope', '$location', '$http', '$rootScop
     }]);
 
 
-app.controller('TopMenuController', ['$scope', '$rootScope', 'UserService',
-    function ($scope, $rootScope, UserService) {
+app.controller('TopMenuController', ['$scope', '$rootScope', 'UserService','sysMessage',
+    function ($scope, $rootScope, UserService, sysMessage) {
         $rootScope.bodyClass = 'content_bg';
         $rootScope.authorised = false;
-        $scope.compName = "V�istkondade register";
+        $scope.compName = "Võistkondade register";
 
 
         UserService.check(function(response){
@@ -82,7 +90,7 @@ app.controller('TopMenuController', ['$scope', '$rootScope', 'UserService',
                 $scope.worker = response;
                 $rootScope.authorised = true;
             }, function(){
-
+                sysMessage.error("Vale kasutajanimi või parool");
             });
         };
         $scope.logout = function(){
@@ -100,8 +108,8 @@ app.controller('MainController', ['$scope', 'Teams', 'sysMessage', '$rootScope',
 
     }]);
 
-app.controller('AllTeamsController', ['$scope', 'Teams', 'sysMessage', '$rootScope',
-    function ($scope, Teams, sysMessage, $rootScope) {
+app.controller('AllTeamsController', ['$scope', 'Teams', 'sysMessage', '$rootScope','$state',
+    function ($scope, Teams, sysMessage, $rootScope, $state) {
         $rootScope.left_menu_active = 'allTeams';
         $scope.teamStates = [];
 
@@ -133,9 +141,20 @@ app.controller('AllTeamsController', ['$scope', 'Teams', 'sysMessage', '$rootSco
         $scope.changeTeamState = function(team){
             var teamState = $.grep($scope.teamStates, function(state){return state.stateName == team.state})[0];
             Teams.change_state({teamId:team.teamId, data:teamState.stateCode},
-                function(response){}, function (){
+                function(response){
+                    if(response){
+                        var index = $scope.teams.indexOf(team);
+                        $scope.teams.splice(index,1);
+                        $scope.teams.splice(index,0,response);
+                    }
+                }, function (){
                     loadTeams();
                 });
+        };
+
+        $scope.editTeam = function(team){
+            $rootScope.editableTeam = team.teamId;
+            $state.go('editTeam');
         }
     }]);
 
@@ -156,7 +175,57 @@ app.controller('NewTeamController', ['$scope', 'Teams', 'sysMessage', '$rootScop
         });
 
         $scope.createTeam = function(){
-            Teams.create($scope.team, function(response){});
+            Teams.create($scope.team, function(response){
+                sysMessage.ok("Salvestatud");
+                $state.go('allTeams')
+            }, function(){
+                sysMessage.error("Viga salvestamisel");
+            });
+        };
+
+    }]);
+app.controller('EditTeamController', ['$scope', 'Teams', 'sysMessage', '$rootScope',
+    function ($scope, Teams, sysMessage, $rootScope) {
+        $rootScope.left_menu_active = 'editTeam';
+        $scope.countries = [];
+        $scope.spotrs = [];
+        $scope.team = {
+            teamId : 0,
+            description:" "
+        };
+
+        Teams.get_by_id({teamId:$rootScope.editableTeam}, function(response){
+            $scope.team = response;
+            loadOtherData();
+        });
+
+        var loadOtherData = function(){
+            Teams.get_sports(function(response){
+                $scope.sports = response;
+                if ($scope.team.teamId != 0){
+                    $scope.team.sportCode = $.grep($scope.sports, function(sport){
+                        return sport.sportName == $scope.team.sport;
+                    })[0].sportCode;
+                }
+            });
+            Teams.get_countries(function(response){
+                $scope.countries = response;
+                if ($scope.team.teamId != 0){
+                    $scope.team.countryCode = $.grep($scope.countries, function(country){
+                        return country.countryName == $scope.team.country;
+                    })[0].countryCode;
+                }
+            });
+        };
+
+
+        $scope.editTeam = function(){
+            Teams.update($scope.team, function(response){
+                $scope.team = response;
+                loadOtherData();
+            },function(){
+                sysMessage.error("Viga salvestamisel");
+            });
         };
 
     }]);

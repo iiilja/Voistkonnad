@@ -25,12 +25,13 @@
             <select class="form-control"
                     ng-model="team.state"
                     ng-options="state.stateName as state.stateName for state in getStatesForTeam(team.state)"
-                    ng-change="changeTeamState(team)"></select>
+                    ng-change="changeTeamState(team)"
+                    ng-disabled="getStatesForTeam(team.state).length < 2"></select>
         </td>
         <td>{{team.regDate}}</td>
         <td>{{team.description}}</td>
         <td>{{team.changer}}</td>
-        <td><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></td>
+        <td><span ng-show="team.state =='mitteaktiivne'" ng-click="editTeam(team)" class="btn btn-success glyphicon glyphicon-edit"/></td>
     </tr>
     </tbody>
 </table>

@@ -6,15 +6,21 @@
         </a>
     </li>
     <li>
-        <a ui-sref="allTeams" ng-class="$root.left_menu_active == 'allTeams' ? 'active' : ''" href>
+        <a ui-sref="allTeams" ng-show="authorised" ng-class="$root.left_menu_active == 'allTeams' ? 'active' : ''" href>
             <span class="ico-block comps-ico"></span>
             Võistkondade haldamine
         </a>
     </li>
     <li>
-        <a ui-sref="newTeam" ng-class="$root.left_menu_active == 'newTeam' ? 'active' : ''" href>
+        <a ui-sref="newTeam" ng-show="authorised" ng-class="$root.left_menu_active == 'newTeam' ? 'active' : ''" href>
             <span class="ico-block comps-ico"></span>
             Võistkonna lisamine
+        </a>
+    </li>
+    <li>
+        <a ui-sref="editTeam" ng-show="authorised && $root.left_menu_active == 'editTeam'" ng-class="$root.left_menu_active == 'editTeam' ? 'active' : ''" href>
+            <span class="ico-block comps-ico"></span>
+            Võistkonna muutmine
         </a>
     </li>
     

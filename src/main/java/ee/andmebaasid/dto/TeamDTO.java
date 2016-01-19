@@ -5,18 +5,19 @@ package ee.andmebaasid.dto;
  * User: iljad Date: 18.01.2016 Time: 19:54
  */
 public class TeamDTO {
-    private String teamName;
+    private Integer teamId;
+    private String name;
     private short sportCode;
     private String countryCode;
     private String email;
     private String description;
 
-    public String getTeamName() {
-        return teamName;
+    public String getName() {
+        return name;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public short getSportCode() {
@@ -51,10 +52,18 @@ public class TeamDTO {
         this.description = description;
     }
 
+    public Integer getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
+    }
+
     @Override
     public String toString() {
         return "TeamDTO{" +
-                "teamName='" + teamName + '\'' +
+                "teamName='" + name + '\'' +
                 ", sportCode=" + sportCode +
                 ", countryCode='" + countryCode + '\'' +
                 ", email='" + email + '\'' +
