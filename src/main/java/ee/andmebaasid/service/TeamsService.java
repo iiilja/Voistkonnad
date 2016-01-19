@@ -35,5 +35,6 @@ public interface TeamsService {
     
     public boolean login(String name, String password);
     public VTootaja getWorkerByLogin(String login);
-    
+
+    public List<VTootaja> getWorkers();
 }

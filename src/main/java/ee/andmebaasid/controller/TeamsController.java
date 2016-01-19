@@ -56,6 +56,10 @@ public class TeamsController {
     public @ResponseBody List<Country> getAllSCountries(){
         return teamsService.getCountries();
     }
+    @RequestMapping(value = "workers")
+    public @ResponseBody List<VTootaja> getAllWorkers(){
+        return teamsService.getWorkers();
+    }
 
     @RequestMapping(value = "{teamId}/state" ,method = RequestMethod.POST)
     public @ResponseBody TeamFull getAllStates(
@@ -93,14 +97,15 @@ public class TeamsController {
     }
 
     @RequestMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Integer createTeam(
+    public @ResponseBody TeamFull createTeam(
             @RequestBody TeamDTO team,
             HttpSession httpSession){
         log.info(team);
         Session session =  sessionService.findSession((String) httpSession.getAttribute("token"));
         VTootaja tootaja = session.getTootaja();
-        return teamsService.createTeam(team.getName(), team.getSportCode(), team.getCountryCode(),
+        int id = teamsService.createTeam(team.getName(), team.getSportCode(), team.getCountryCode(),
                 tootaja.getTootajaId(), team.getEmail(), team.getDescription());
+        return teamsService.findTeamById(id);
     }
 
 

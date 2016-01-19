@@ -163,5 +163,10 @@ public class TeamsServiceImpl implements TeamsService {
         Session session = sessionFactory.getCurrentSession();
         return (VTootaja) session.getNamedQuery("VTootaja.findByKasutajanimi").setParameter("kasutajanimi", login).uniqueResult();
     }
-    
+
+    @Override
+    public List<VTootaja> getWorkers() {
+        Session session = sessionFactory.getCurrentSession();
+        return Collections.checkedList(session.getNamedQuery("VTootaja.findAll").list(), VTootaja.class);
+    }
 }

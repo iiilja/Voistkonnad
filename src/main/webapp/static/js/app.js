@@ -1,5 +1,5 @@
-var apiEndpoint = "http://localhost:8080/";
-//var apiEndpoint = "http://84.52.56.74:8080/voistkonnad/";
+//var apiEndpoint = "http://localhost:8080/";
+var apiEndpoint = "http://84.52.56.74:8080/voistkonnad/";
 
 var app = angular.module('voiskondadeApp', ['voiskondadeApp.services','ngRoute', 'ngSanitize', 'ui.bootstrap', 'toaster', 'ui.router']);
 
@@ -158,8 +158,8 @@ app.controller('AllTeamsController', ['$scope', 'Teams', 'sysMessage', '$rootSco
         }
     }]);
 
-app.controller('NewTeamController', ['$scope', 'Teams', 'sysMessage', '$rootScope',
-    function ($scope, Teams, sysMessage, $rootScope) {
+app.controller('NewTeamController', ['$scope', 'Teams', 'sysMessage', '$rootScope','$state',
+    function ($scope, Teams, sysMessage, $rootScope, $state) {
         $rootScope.left_menu_active = 'newTeam';
         $scope.countries = [];
         $scope.spotrs = [];
@@ -177,7 +177,8 @@ app.controller('NewTeamController', ['$scope', 'Teams', 'sysMessage', '$rootScop
         $scope.createTeam = function(){
             Teams.create($scope.team, function(response){
                 sysMessage.ok("Salvestatud");
-                $state.go('allTeams')
+                $rootScope.editableTeam = response.teamId;
+                $state.go('editTeam')
             }, function(){
                 sysMessage.error("Viga salvestamisel");
             });
